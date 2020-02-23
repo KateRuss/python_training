@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
+from contact import Contact
 
 class TestAddContact(unittest.TestCase):
     def setUp(self):
@@ -16,11 +17,27 @@ class TestAddContact(unittest.TestCase):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, login="admin", password="secret")
-        self.create_new_contact(wd, "testFirstName", "TestLastName", "jgjvhzjvjzvjv 887878", "765787657888",
-                                "rtyutyyu88599485", "886945694565476", "84584758", "dgkjgjgkdgk", "kjhfkdhkhf",
-                                "kjxkjxlhj")
+        self.create_new_contact(wd, Contact(first_name="testFirstName", last_name="TestLastName",
+                                            address="jgjvhzjvjzvjv 887878", home_phone_number="765787657888",
+                                mobile_phone_number="88599485", work_phone_number="886945694565476",
+                                            fax_number="84584758", email_1="dgkjgjgkdgk", email_2="kjhfkdhkhf",
+                                email_3="kjxkjxlhj"))
         self.return_to_home_page(wd)
         self.logout(wd)
+
+    def test_add_empty_contact(self):
+        wd = self.wd
+        self.open_home_page(wd)
+        self.login(wd, login="admin", password="secret")
+        self.create_new_contact(wd, Contact(first_name="", last_name="",
+                                            address="", home_phone_number="",
+                                mobile_phone_number="", work_phone_number="",
+                                            fax_number="", email_1="", email_2="",
+                                email_3=""))
+        self.return_to_home_page(wd)
+        self.logout(wd)
+
+
 
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
@@ -28,40 +45,39 @@ class TestAddContact(unittest.TestCase):
     def return_to_home_page(self, wd):
         wd.find_element_by_link_text("home page").click()
 
-    def create_new_contact(self, wd, first_name, last_name, address, home_phone_number, mobile_phone_number,
-                           work_phone_number, fax_number, email_1, email_2, email_3):
+    def create_new_contact(self, wd, contact):
         # create new contact
         wd.find_element_by_link_text("add new").click()
         #fill contact fields (displayd on home page)
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys(first_name)
+        wd.find_element_by_name("firstname").send_keys(contact.first_name)
         wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys(last_name)
+        wd.find_element_by_name("lastname").send_keys(contact.last_name)
         wd.find_element_by_name("address").click()
         wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys(address)
+        wd.find_element_by_name("address").send_keys(contact.address)
         wd.find_element_by_name("home").click()
         wd.find_element_by_name("home").clear()
-        wd.find_element_by_name("home").send_keys(home_phone_number)
+        wd.find_element_by_name("home").send_keys(contact.home_phone_number)
         wd.find_element_by_name("mobile").click()
         wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys(mobile_phone_number)
+        wd.find_element_by_name("mobile").send_keys(contact.mobile_phone_number)
         wd.find_element_by_name("work").click()
         wd.find_element_by_name("work").clear()
-        wd.find_element_by_name("work").send_keys(work_phone_number)
+        wd.find_element_by_name("work").send_keys(contact.work_phone_number)
         wd.find_element_by_name("fax").click()
         wd.find_element_by_name("fax").clear()
-        wd.find_element_by_name("fax").send_keys(fax_number)
+        wd.find_element_by_name("fax").send_keys(contact.fax_number)
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys(email_1)
+        wd.find_element_by_name("email").send_keys(contact.email_1)
         wd.find_element_by_name("email2").click()
         wd.find_element_by_name("email2").clear()
-        wd.find_element_by_name("email2").send_keys(email_2)
+        wd.find_element_by_name("email2").send_keys(contact.email_2)
         wd.find_element_by_name("email3").click()
         wd.find_element_by_name("email3").clear()
-        wd.find_element_by_name("email3").send_keys(email_3)
+        wd.find_element_by_name("email3").send_keys(contact.email_3)
         # submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
