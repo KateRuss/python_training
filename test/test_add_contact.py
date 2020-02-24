@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from contact import Contact
-from application import Application
+from model.contact import Contact
+from fixtura.application import Application
 import pytest
 
 @pytest.fixture
