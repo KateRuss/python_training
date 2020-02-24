@@ -17,7 +17,7 @@ class Application:
     def logout(self):
         wd = self.wd
         wd.find_element_by_link_text("Logout").click()
-        wd.find_element_by_name("user")
+        wd.find_element_by_name("user").click()
 
     def return_to_groups_page(self):
         wd = self.wd
