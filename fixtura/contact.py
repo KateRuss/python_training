@@ -2,6 +2,7 @@
 class ContactHelper:
     def __init__(self, app):
         self.app = app
+        self.accept_next_alert = False
 
     def create_new(self, contact):
         wd = self.app.wd
@@ -43,9 +44,9 @@ class ContactHelper:
 
     def delete_first_contact(self):
         wd = self.app.wd
+        self.accept_next_alert = True  # <- for control alert window
         # select first contact
         wd.find_element_by_name("selected[]").click()
-        self.accept_next_alert = True   # <- for control alert window
         # delete element
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         # submit element delete
@@ -53,7 +54,11 @@ class ContactHelper:
 
     def delete_all_contact(self):
         wd = self.app.wd
-
+        self.accept_next_alert = True  # <- for control alert window
+        wd.find_element_by_id("MassCB").click()
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        # submit element delete
+        self.close_alert()
 
 
     def close_alert(self):
