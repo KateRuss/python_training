@@ -1,14 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from model.contact import Contact
-from fixtura.application import Application
-import pytest
 
-@pytest.fixture
-def app(request):
-    fixture = Application()
-    request.addfinalizer(fixture.destroy)
-    return fixture
 
 def test_add_contact(app):
     app.session.login(username="admin", password="secret")
@@ -19,6 +12,7 @@ def test_add_contact(app):
                                    email_3="kjxkjxlhj"))
     app.session.logout()
 
+
 def test_add_empty_contact(app):
     app.session.login(username="admin", password="secret")
     app.contact.create_new(Contact(first_name="", last_name="",
@@ -27,6 +21,7 @@ def test_add_empty_contact(app):
                                    fax_number="", email_1="", email_2="",
                                    email_3=""))
     app.session.logout()
+
 
 if __name__ == "__main__":
     unittest.main()
