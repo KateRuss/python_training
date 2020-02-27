@@ -21,6 +21,3 @@ def test_add_empty_contact(app):
                                    email_3=""))
     app.session.logout()
 
-
-if __name__ == "__main__":
-    unittest.main()
