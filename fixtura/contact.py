@@ -1,3 +1,4 @@
+
 class ContactHelper:
     def __init__(self, app):
         self.app = app
@@ -40,3 +41,25 @@ class ContactHelper:
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         self.app.return_to_home_page()
 
+    def delete_first_contact(self):
+        wd = self.app.wd
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        self.accept_next_alert = True   # <- for control alert window
+        # delete element
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        # submit element delete
+        self.close_alert()
+
+    def delete_all_contact(self):
+        wd = self.app.wd
+
+
+
+    def close_alert(self):
+        wd = self.app.wd
+        alert = wd.switch_to.alert
+        if self.accept_next_alert:
+            alert.accept()
+        else:
+            alert.dismiss()
