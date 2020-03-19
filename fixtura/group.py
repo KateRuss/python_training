@@ -49,5 +49,7 @@ class GroupHelper:
         # select  first group
         wd.find_element_by_name("selected[]").click()
         # edited group
+        wd.find_element_by_name("edit").click()
         self.group_info(group)
+        wd.find_element_by_name("update").click()
         self.return_to_groups_page()
