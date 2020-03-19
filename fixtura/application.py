@@ -7,6 +7,7 @@ from fixtura.session import SessionHelper
 from fixtura.group import GroupHelper
 from fixtura.contact import ContactHelper
 
+
 class Application:
 
     def __init__(self):
@@ -23,7 +24,6 @@ class Application:
     def return_to_home_page(self):
         wd = self.wd
         wd.find_element_by_link_text("home page").click()
-
 
     def destroy(self):
         self.wd.quit()
