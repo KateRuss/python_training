@@ -66,3 +66,13 @@ class ContactHelper:
         if wd.find_element_by_xpath("//span[@id='search_count']") == 0:
             return True
 
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.app.return_to_home_page()
+        contact = []
+        for element in wd.find_elements_by_css_selector("span.group"):
+            text = element.text
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            groups.append(Group(name=text, id=id))
+        return groups
+
