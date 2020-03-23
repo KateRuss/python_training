@@ -61,6 +61,7 @@ class ContactHelper:
 
     def contact_count(self):
         wd = self.app.wd
+        self.app.return_to_home_page()
       #  self.app.return_to_home_page()
         if wd.find_element_by_xpath("//span[@id='search_count']") == 0:
             return True
