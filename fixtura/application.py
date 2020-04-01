@@ -27,7 +27,8 @@ class Application:
 
     def open_home_page(self):
         wd = self.wd
-        wd.get("http://localhost/addressbook/")
+        if wd.current_url is not "http://localhost/addressbook/":
+            wd.get("http://localhost/addressbook/")
 
     def return_to_home_page(self):
         wd = self.wd
