@@ -43,6 +43,7 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         # submit element delete
         wd.switch_to.alert.accept()
+        wd.implicitly_wait(3)
 
     def delete_all_contact(self):
         wd = self.app.wd
@@ -66,6 +67,8 @@ class ContactHelper:
       #  self.app.return_to_home_page()
         if wd.find_element_by_xpath("//span[@id='search_count']") == 0:
             return True
+        else:
+            return False
 
     def get_contact_list(self):
         wd = self.app.wd
