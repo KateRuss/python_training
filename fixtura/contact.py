@@ -34,6 +34,7 @@ class ContactHelper:
         # submit contact creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         self.app.return_to_home_page()
+        self.contact_cache = None
 
     def delete_first_contact(self):
         wd = self.app.wd
@@ -44,6 +45,7 @@ class ContactHelper:
         # submit element delete
         wd.switch_to.alert.accept()
         wd.implicitly_wait(3)
+        self.contact_cache = None
 
     def delete_all_contact(self):
         wd = self.app.wd
@@ -51,6 +53,7 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         # submit contact delete
         wd.switch_to.alert.accept()
+        self.contact_cache = None
 
     def edit_first_contact(self, contact):
         wd = self.app.wd
@@ -60,25 +63,26 @@ class ContactHelper:
         self.fill_contact_form(contact)
         wd.find_element_by_xpath("(//input[@name='update'])[2]").click()
         self.app.return_to_home_page()
+        self.contact_cache = None
 
     def contact_count(self):
         wd = self.app.wd
         self.app.return_to_home_page()
       #  self.app.return_to_home_page()
-        if wd.find_element_by_xpath("//span[@id='search_count']") == 0:
-            return True
-        else:
-            return False
+        #if wd.find_element_by_xpath("//span[@id='search_count']") == 0:
+        return int(wd.find_element_by_xpath("//span[@id='search_count']").text)
 
+    contact_cache = None
     def get_contact_list(self):
-        wd = self.app.wd
-        self.app.return_to_home_page()
-        contacts = []
-        for element in wd.find_elements_by_name("entry"):
-            row = element.find_elements_by_tag_name("td")
-            last_name = row[1].text
-            name = row[2].text
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts.append(Contact(last_name=last_name, first_name=name, id=id))
-        return contacts
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.app.return_to_home_page()
+            self.contact_cache = []
+            for element in wd.find_elements_by_name("entry"):
+                row = element.find_elements_by_tag_name("td")
+                last_name = row[1].text
+                name = row[2].text
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                self.contact_cache.append(Contact(last_name=last_name, first_name=name, id=id))
+        return list(self.contact_cache)
 
