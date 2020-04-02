@@ -4,7 +4,7 @@ from sys import maxsize
 
 def test_add_group(app):
     old_groups = app.group.get_group_list()
-    group = Group(name="test_group", header="fhfh", footer="hfhhgjkj")
+    group = Group(name="test_group2", header="fhfh", footer="hfhhgjkj")
     app.group.create(group)
     assert len(old_groups) + 1 == app.group.count()
     new_groups = app.group.get_group_list()
