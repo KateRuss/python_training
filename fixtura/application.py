@@ -24,7 +24,6 @@ class Application:
         except:
             return False
 
-
     def open_home_page(self):
         wd = self.wd
         if wd.current_url is not "http://localhost/addressbook/":
