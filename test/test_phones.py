@@ -18,6 +18,9 @@ def test_phones_on_contact_view_page(app):
 def clear(s):
     return re.sub("[() -]", "", s)
 
+def clear_space(s):
+    return re.sub(" {2}", " ", s)
+
 
 def merge_phones_like_on_home_page(contact):
     return "\n".join(filter(lambda x: x != "", map(lambda x: clear(x), filter(lambda x: x is not None,
