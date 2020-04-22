@@ -2,6 +2,7 @@
 from model.group import Group
 import pytest
 
+
 @pytest.mark.ui_tests
 def test_add_group(app, db, json_groups, check_ui):
     group = json_groups
