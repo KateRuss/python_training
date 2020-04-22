@@ -1,5 +1,6 @@
 from fixtura.application import Application
 from fixtura.db import Dbfixture
+from fixtura.orm import ORMfixture
 import pytest
 import json
 import os.path
@@ -39,6 +40,12 @@ def db(request):
     return dbfixture
 
 
+@pytest.fixture(scope="session")
+def orm(request):
+    db_config = load_config(request.config.getoption("--target"))["db"]
+    dbfixture = ORMfixture(host=db_config["host"], name=db_config["name"], user=db_config["user"],
+                          password=db_config["password"])
+    return dbfixture
 
 @pytest.fixture(scope="session", autouse=True)
 def stop(request):
