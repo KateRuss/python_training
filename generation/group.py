@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from model.group import Group
 import random
 import string

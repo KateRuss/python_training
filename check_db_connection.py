@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from fixtura.orm import ORMfixture
 from model.group import Group
 

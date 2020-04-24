@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from fixtura.application import Application
 from fixtura.db import Dbfixture
 from fixtura.orm import ORMfixture

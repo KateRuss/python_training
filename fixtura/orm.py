@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from pony.orm import *
 from model.group import Group
 from model.contact import Contact

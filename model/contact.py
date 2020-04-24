@@ -1,4 +1,6 @@
-#author - E.Rusetskaya
+# -*- coding: utf-8 -*-
+
+
 from sys import maxsize
 class Contact:
 

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from model.contact import Contact
 from selenium.webdriver.support.ui import Select
 import re

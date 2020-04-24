@@ -1,6 +1,4 @@
-# Ekaterina Rusetskaya
-# 24.02.20
-
+# -*- coding: utf-8 -*-
 
 from selenium import webdriver
 from fixtura.session import SessionHelper
